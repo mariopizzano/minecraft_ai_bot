@@ -1,214 +1,195 @@
 const mineflayer = require('mineflayer')
 const { pathfinder, Movements, goals } = require('mineflayer-pathfinder')
+const toolPlugin = require('mineflayer-tool').plugin
 const axios = require('axios')
 
 // --- CONFIGURAZIONE ---
 const CONFIG = {
-  mc_host: 'localhost',
-  mc_port: 25565,
-  bot_name: 'AI_Agent',
-  
-  // Configurazione Ollama
-  ollama_endpoint: 'http://localhost:11434/api/generate',
-  ollama_model: 'llama3.1', // Assicurati di aver fatto 'ollama pull llama3.1'
-  ollama_ctx: 2048,        // Contesto limitato per velocità
-  
-  // Loop di gioco (ms)
-  loop_interval: 15000     // 15s: Tempo sicuro per inferenza su GPU consumer
+  host: 'localhost',
+  port: 25565,
+  username: 'AI_Final',
+  model: 'llama3.1',
+  api_url: 'http://localhost:11434/api/generate',
+  ctx: 1024,
+  timeout: 10000
 }
 
-// Inizializzazione Bot
 const bot = mineflayer.createBot({
-  host: CONFIG.mc_host,
-  port: CONFIG.mc_port,
-  username: CONFIG.bot_name,
-  version: false // Auto-detect versione
+  host: CONFIG.host,
+  port: CONFIG.port,
+  username: CONFIG.username,
+  version: false
 })
 
 bot.loadPlugin(pathfinder)
+bot.loadPlugin(toolPlugin)
 
-// Variabili di Stato
-let isThinking = false
-let lastChatRequest = "" // Buffer per memorizzare l'ultimo comando chat
+// --- STATO ---
+let priorityCommand = null
+let activeAiController = null
+let isActionInProgress = false // IL VERO SEMAFORO FISICO
 
-// --- GESTIONE EVENTI ---
+// --- SYSTEM PROMPT ---
+const SYSTEM_PROMPT = `
+You are a Minecraft Agent.
+GOAL: Execute the user's "ORDER".
+
+API COMMANDS:
+- {"cmd": "come", "target": "player"}
+- {"cmd": "stop"}
+- {"cmd": "dig", "block": "oak_log"}
+- {"cmd": "follow", "target": "player"}
+- {"cmd": "move", "x": 10, "z": 0} (Explore only if ORDER is None)
+- {"cmd": "idle"}
+
+RULES:
+1. If ORDER contains "vieni" -> {"cmd": "come"}
+2. If ORDER contains "stop" -> {"cmd": "stop"}
+3. If ORDER contains "scava" -> {"cmd": "dig"}
+4. If ORDER is "None" -> {"cmd": "idle"}
+`
+
+// --- EVENTI ---
 bot.on('spawn', () => {
-  console.log(`[INIT] ${CONFIG.bot_name} connesso. Modello AI: ${CONFIG.ollama_model}`)
+  console.log('[SYSTEM] Bot Online. Avvio loop decisionale...')
+  const moves = new Movements(bot)
+  bot.pathfinder.setMovements(moves)
   
-  // Setup Pathfinding
-  const defaultMove = new Movements(bot)
-  bot.pathfinder.setMovements(defaultMove)
-
-  // Warmup e avvio loop
-  setTimeout(() => {
-    console.log('[SYSTEM] Loop Decisionale Avviato.')
-    bot.chat('AI Online. In attesa di comandi.')
-    setInterval(aiGameLoop, CONFIG.loop_interval)
-  }, 3000)
+  // AVVIA IL PRIMO CICLO DI PENSIERO
+  setTimeout(decisionLoop, 3000)
 })
 
 bot.on('chat', (username, message) => {
-  if (username === CONFIG.bot_name) return
-  console.log(`[USER INPUT] ${username}: ${message}`)
-  // Salviamo il messaggio per iniettarlo nel prossimo prompt
-  lastChatRequest = `${username} asks: "${message}"`
+  if (username === CONFIG.username) return
+  console.log(`[CHAT] ${username}: ${message}`)
+  
+  // 1. ABORT AI: Smetti di pensare al passato
+  if (activeAiController) {
+      activeAiController.abort()
+      activeAiController = null
+  }
+
+  // 2. ABORT FISICA: Fermati subito
+  bot.pathfinder.stop()
+  isActionInProgress = false // Forza il reset del semaforo
+  
+  // 3. SETTA IL NUOVO ORDINE
+  priorityCommand = `${username} says: "${message}"`
+  
+  // 4. FORZA UN NUOVO CICLO DI PENSIERO IMMEDIATO
+  // (Senza aspettare il timeout del loop precedente)
+  decisionLoop()
 })
 
-bot.on('error', (err) => console.log(`[ERROR] ${err.message}`))
-bot.on('kicked', (reason) => console.log(`[KICKED] ${reason}`))
-
-
-// --- 1. MODULO PERCEZIONE (INPUT) ---
-function getSensoryInput() {
+// --- MODULO AI ---
+async function askBrain() {
   const p = bot.entity.position
-  
-  // Scansione visiva limitata (Raggio 4)
-  const nearbyBlocks = []
-  for (let x = -4; x <= 4; x+=2) { // Step 2 per ottimizzare
-    for (let y = 0; y <= 1; y++) {
-      for (let z = -4; z <= 4; z+=2) {
-        const block = bot.blockAt(p.offset(x, y, z))
-        if (block && block.name !== 'air' && !nearbyBlocks.includes(block.name)) {
-          nearbyBlocks.push(block.name)
-        }
-      }
-    }
-  }
-
-  return {
-    status: {
-      health: Math.round(bot.health),
-      food: Math.round(bot.food),
-      day: bot.time.timeOfDay < 13000
-    },
-    position: { x: Math.floor(p.x), y: Math.floor(p.y), z: Math.floor(p.z) },
+  const state = {
+    hp: Math.round(bot.health),
+    pos: { x: Math.floor(p.x), y: Math.floor(p.y), z: Math.floor(p.z) },
     inventory: bot.inventory.items().map(i => i.name).slice(0, 5),
-    surroundings: nearbyBlocks.slice(0, 8),
-    latest_instruction: lastChatRequest || "None (Explore or Survive)"
+    ORDER: priorityCommand || "None"
   }
-}
 
-// --- 2. MODULO RAGIONAMENTO (LLM) ---
-async function queryBrain(state) {
-  // FEW-SHOT PROMPTING: Esempi espliciti con "reasoning" incluso
-  const prompt = `
-You are a Minecraft AI. 
-GOAL: Obey user instructions. If none, explore.
-
-CURRENT STATE:
-${JSON.stringify(state)}
-
-INSTRUCTIONS:
-- Return a SINGLE JSON object.
-- You MUST include a "reasoning" field explaining your logic.
-
-AVAILABLE ACTIONS (Examples):
-1. {"type": "chat", "msg": "Hello!", "reasoning": "The user said hi, I am replying."}
-2. {"type": "move", "x": 5, "z": 0, "reasoning": "User asked to move forward."}
-3. {"type": "jump", "reasoning": "User asked to jump."}
-4. {"type": "follow", "target": "Steve", "reasoning": "User asked to follow them."}
-
-Output JSON only:
-`
-
-  try {
-    const response = await axios.post(CONFIG.ollama_endpoint, {
-      model: CONFIG.ollama_model,
-      prompt: prompt,
-      stream: false,
-      format: "json", // Forza output strutturato nativo di Llama 3
-      options: { 
-        temperature: 0.1, // Determinismo massimo
-        num_ctx: CONFIG.ollama_ctx 
-      }
-    })
-
-    const decision = JSON.parse(response.data.response)
-    return decision
-  } catch (e) {
-    console.error(`[AI FAIL] ${e.message}`)
-    return null
-  }
-}
-
-// --- 3. MODULO ATTUAZIONE (OUTPUT) ---
-async function execute(cmd) {
-  if (!cmd) return
-
-  // Fallback per il campo reasoning se l'AI usa chiavi diverse
-  const thought = cmd.reasoning || cmd.reason || cmd.thought || "No reasoning provided";
+  activeAiController = new AbortController()
   
-  console.log(`[THOUGHT] ${thought}`)
-  console.log(`[ACTION] ${cmd.type} ${JSON.stringify(cmd).replace(/"type":".*?",/,'').replace(/"reasoning":".*?"/,'')}`)
+  try {
+    const response = await axios.post(CONFIG.api_url, {
+      model: CONFIG.model,
+      prompt: `${SYSTEM_PROMPT}\nSTATE: ${JSON.stringify(state)}`,
+      stream: false,
+      format: "json",
+      options: { temperature: 0.1, num_ctx: CONFIG.ctx }
+    }, {
+      signal: activeAiController.signal,
+      timeout: CONFIG.timeout
+    })
+    
+    activeAiController = null
+    return JSON.parse(response.data.response)
 
-  // Pulisci l'ultima richiesta chat processata
-  if (lastChatRequest) lastChatRequest = ""
+  } catch (e) {
+    activeAiController = null
+    if (axios.isCancel(e)) return null // Se annullato, ritorna null
+    return { cmd: "idle" } // Fallback
+  }
+}
+
+// --- ESECUZIONE FISICA (BLOCCANTE) ---
+async function execute(decision) {
+  if (!decision || !decision.cmd) return
+
+  console.log(`[EXEC] ${decision.cmd.toUpperCase()}`)
+  isActionInProgress = true // ALZA IL SEMAFORO ROSSO
 
   try {
-    switch (cmd.type) {
-      case 'chat':
-        if (cmd.msg) bot.chat(cmd.msg)
+    switch (decision.cmd) {
+      case 'come':
+        const target = Object.values(bot.players).find(p => p.username !== CONFIG.username)?.entity
+        if (target) {
+            bot.chat("Arrivo.")
+            priorityCommand = null // Ordine preso in carico
+            await bot.pathfinder.goto(new goals.GoalNear(target.position.x, target.position.y, target.position.z, 1))
+        }
         break
-        
-      case 'jump':
-        bot.setControlState('jump', true)
-        setTimeout(() => bot.setControlState('jump', false), 500)
+
+      case 'stop':
+        bot.pathfinder.stop()
+        priorityCommand = null
+        break
+
+      case 'dig':
+        const blockName = decision.block || "oak_log"
+        const blocks = bot.findBlocks({ matching: b => b.name.includes(blockName), maxDistance: 32, count: 1 })
+        if (blocks.length > 0) {
+            bot.chat("Scavo.")
+            priorityCommand = null
+            const targetBlock = bot.blockAt(blocks[0])
+            await bot.tool.equipForBlock(targetBlock)
+            await bot.dig(targetBlock)
+        } else {
+            bot.chat("Non trovo blocchi.")
+            priorityCommand = null
+        }
         break
 
       case 'move':
-        // Coordinate relative -> assolute
-        const goal = new goals.GoalNear(
-          bot.entity.position.x + (cmd.x || 0),
-          bot.entity.position.y,
-          bot.entity.position.z + (cmd.z || 0),
-          1
-        )
-        await bot.pathfinder.goto(goal)
-        break
-
-      case 'follow':
-        // Cerca il player target o il primo disponibile
-        let targetName = cmd.target
-        
-        // Se il target non è specificato o è generico, prendi il primo player non-bot
-        if (!targetName || targetName === 'player' || targetName === 'me') {
-           const playerNames = Object.keys(bot.players).filter(n => n !== CONFIG.bot_name)
-           targetName = playerNames[0]
-        }
-
-        const targetEntity = bot.players[targetName]?.entity
-        
-        if (targetEntity) {
-          bot.chat(`Arrivo, ${targetName}!`)
-          await bot.pathfinder.goto(new goals.GoalFollow(targetEntity, 2))
-        } else {
-          console.log(`[WARN] Player '${targetName}' non trovato o troppo lontano.`)
-          bot.chat("Non vedo nessuno da seguire qui vicino.")
+        if (!priorityCommand) {
+             const x = bot.entity.position.x + (decision.x || 0)
+             const z = bot.entity.position.z + (decision.z || 0)
+             await bot.pathfinder.goto(new goals.GoalNear(x, bot.entity.position.y, z, 1))
         }
         break
         
-      default:
-        console.log(`[WARN] Azione sconosciuta: ${cmd.type}`)
+      case 'idle':
+         // Piccolo delay per non spammare la CPU
+         await new Promise(r => setTimeout(r, 1000))
+         break
     }
   } catch (err) {
-    console.log(`[EXECUTION ERROR] ${err.message}`)
-    bot.chat("Non riesco a completare l'azione.")
+    console.log(`[FAIL] ${err.message}`)
   }
+  
+  isActionInProgress = false // ABBASSA IL SEMAFORO VERDE
 }
 
-// --- MAIN LOOP ---
-async function aiGameLoop() {
-  if (isThinking) return
-  isThinking = true
-
-  const state = getSensoryInput()
-  
-  console.log('--- Analisi Stato ---')
-  const decision = await queryBrain(state)
-  
-  if (decision) {
-    await execute(decision)
+// --- IL CUORE DEL SISTEMA (LOOP RICORSIVO) ---
+async function decisionLoop() {
+  // 1. Se il bot sta lavorando, NON disturbare. Riprova tra poco.
+  if (isActionInProgress || bot.pathfinder.isMoving()) {
+      setTimeout(decisionLoop, 500)
+      return
   }
 
-  isThinking = false
+  // 2. Chiedi al cervello
+  // Nota: Se askBrain ritorna null (perché annullato dalla chat), non facciamo nulla.
+  const decision = await askBrain()
+  
+  // 3. Esegui (Questo bloccherà il codice finché l'azione non finisce)
+  if (decision) {
+      await execute(decision)
+  }
+
+  // 4. Appena finito, ricomincia subito
+  setTimeout(decisionLoop, 100)
 }
