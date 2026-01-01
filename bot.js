@@ -1,5 +1,6 @@
 const mineflayer = require('mineflayer')
 const { pathfinder, Movements, goals } = require('mineflayer-pathfinder')
+const collectBlock = require('mineflayer-collectblock').plugin
 const toolPlugin = require('mineflayer-tool').plugin
 const axios = require('axios')
 
@@ -7,189 +8,194 @@ const axios = require('axios')
 const CONFIG = {
   host: 'localhost',
   port: 25565,
-  username: 'AI_Final',
+  username: 'AI_Engineer',
   model: 'llama3.1',
   api_url: 'http://localhost:11434/api/generate',
-  ctx: 1024,
-  timeout: 10000
+  ctx: 2048, // Aumentato per gestire meglio lo stato
+  timeout: 15000
 }
 
 const bot = mineflayer.createBot({
   host: CONFIG.host,
   port: CONFIG.port,
   username: CONFIG.username,
-  version: false
+  version: false // Auto-detect
 })
 
+// Caricamento plugin
 bot.loadPlugin(pathfinder)
 bot.loadPlugin(toolPlugin)
+bot.loadPlugin(collectBlock)
 
-// --- STATO ---
-let priorityCommand = null
-let activeAiController = null
-let isActionInProgress = false // IL VERO SEMAFORO FISICO
+// --- STATO GLOBALE ---
+let currentGoal = null // L'obiettivo di alto livello (es: "Ottieni legna")
+let isBusy = false     // Flag di stato fisico
+let interruptSignal = false // Segnale per abortire l'azione fisica corrente
 
-// --- SYSTEM PROMPT ---
+// --- SYSTEM PROMPT OTTIMIZZATO ---
+// Definiamo un output JSON rigoroso. L'AI decide COSA fare, non COME muoversi.
 const SYSTEM_PROMPT = `
-You are a Minecraft Agent.
-GOAL: Execute the user's "ORDER".
+You are a Minecraft Autonomous Agent.
+Goal: Fulfill the user's high-level COMMAND based on your INVENTORY and STATE.
 
-API COMMANDS:
-- {"cmd": "come", "target": "player"}
-- {"cmd": "stop"}
-- {"cmd": "dig", "block": "oak_log"}
-- {"cmd": "follow", "target": "player"}
-- {"cmd": "move", "x": 10, "z": 0} (Explore only if ORDER is None)
-- {"cmd": "idle"}
+AVAILABLE ACTIONS (JSON format):
+1. GATHER: {"action": "gather", "target": "oak_log", "count": 1} 
+   - Use this to get resources like wood, dirt, stone.
+2. STOP: {"action": "stop"}
+   - Use this immediately if the user says stop.
+3. IDLE: {"action": "idle"}
+   - Use this if you have completed the task or have nothing to do.
 
-RULES:
-1. If ORDER contains "vieni" -> {"cmd": "come"}
-2. If ORDER contains "stop" -> {"cmd": "stop"}
-3. If ORDER contains "scava" -> {"cmd": "dig"}
-4. If ORDER is "None" -> {"cmd": "idle"}
+LOGIC RULES:
+- If user wants a Crafting Table but you have no wood -> Action is GATHER oak_log.
+- If user wants a Crafting Table and you HAVE wood -> (Next module we will implement crafting). For now, IDLE.
+- Always check INVENTORY before deciding.
 `
 
-// --- EVENTI ---
+// --- GESTIONE EVENTI ---
 bot.on('spawn', () => {
-  console.log('[SYSTEM] Bot Online. Avvio loop decisionale...')
+  console.log('[SYSTEM] Engineering Bot Online.')
   const moves = new Movements(bot)
   bot.pathfinder.setMovements(moves)
   
-  // AVVIA IL PRIMO CICLO DI PENSIERO
-  setTimeout(decisionLoop, 3000)
+  // Avvio loop decisionale principale
+  mainLoop()
 })
 
 bot.on('chat', (username, message) => {
   if (username === CONFIG.username) return
-  console.log(`[CHAT] ${username}: ${message}`)
+  console.log(`[CMD] ${username}: ${message}`)
   
-  // 1. ABORT AI: Smetti di pensare al passato
-  if (activeAiController) {
-      activeAiController.abort()
-      activeAiController = null
+  // 1. Interrupt Immediato
+  if (isBusy) {
+    interruptSignal = true
+    bot.pathfinder.stop()
+    bot.collectBlock.cancelTask() // Funzione critica di collectblock
+    console.log('[SYSTEM] Interruzione forzata.')
   }
 
-  // 2. ABORT FISICA: Fermati subito
-  bot.pathfinder.stop()
-  isActionInProgress = false // Forza il reset del semaforo
-  
-  // 3. SETTA IL NUOVO ORDINE
-  priorityCommand = `${username} says: "${message}"`
-  
-  // 4. FORZA UN NUOVO CICLO DI PENSIERO IMMEDIATO
-  // (Senza aspettare il timeout del loop precedente)
-  decisionLoop()
+  // 2. Aggiornamento Obiettivo
+  currentGoal = message
 })
 
-// --- MODULO AI ---
-async function askBrain() {
-  const p = bot.entity.position
+// --- MOTORE INFERENZIALE (AI) ---
+async function analyzeSituation() {
+  if (!currentGoal) return { action: "idle" }
+
+  // Snapshot dello stato
+  const inventory = bot.inventory.items().reduce((acc, item) => {
+    acc[item.name] = (acc[item.name] || 0) + item.count
+    return acc
+  }, {})
+
+  const nearbyBlocks = bot.findBlocks({ 
+    matching: (blk) => ['oak_log', 'birch_log'].includes(blk.name),
+    maxDistance: 16, 
+    count: 1 
+  }).length > 0 ? "Wood detected nearby" : "No wood nearby"
+
   const state = {
-    hp: Math.round(bot.health),
-    pos: { x: Math.floor(p.x), y: Math.floor(p.y), z: Math.floor(p.z) },
-    inventory: bot.inventory.items().map(i => i.name).slice(0, 5),
-    ORDER: priorityCommand || "None"
+    hp: bot.health,
+    inventory: inventory,
+    environment_scan: nearbyBlocks,
+    USER_ORDER: currentGoal
   }
 
-  activeAiController = new AbortController()
-  
   try {
     const response = await axios.post(CONFIG.api_url, {
       model: CONFIG.model,
-      prompt: `${SYSTEM_PROMPT}\nSTATE: ${JSON.stringify(state)}`,
+      prompt: `${SYSTEM_PROMPT}\nCURRENT STATE: ${JSON.stringify(state)}`,
       stream: false,
       format: "json",
       options: { temperature: 0.1, num_ctx: CONFIG.ctx }
-    }, {
-      signal: activeAiController.signal,
-      timeout: CONFIG.timeout
-    })
+    }, { timeout: CONFIG.timeout })
     
-    activeAiController = null
     return JSON.parse(response.data.response)
-
   } catch (e) {
-    activeAiController = null
-    if (axios.isCancel(e)) return null // Se annullato, ritorna null
-    return { cmd: "idle" } // Fallback
+    console.error(`[AI ERROR] ${e.message}`)
+    return { action: "idle" }
   }
 }
 
-// --- ESECUZIONE FISICA (BLOCCANTE) ---
-async function execute(decision) {
-  if (!decision || !decision.cmd) return
+// --- LIVELLO ESECUTIVO (PRIMITIVE FISICHE) ---
+async function executeAction(plan) {
+  if (interruptSignal) return
+  isBusy = true
 
-  console.log(`[EXEC] ${decision.cmd.toUpperCase()}`)
-  isActionInProgress = true // ALZA IL SEMAFORO ROSSO
+  console.log(`[EXEC] Action: ${plan.action} | Target: ${plan.target || 'N/A'}`)
 
   try {
-    switch (decision.cmd) {
-      case 'come':
-        const target = Object.values(bot.players).find(p => p.username !== CONFIG.username)?.entity
-        if (target) {
-            bot.chat("Arrivo.")
-            priorityCommand = null // Ordine preso in carico
-            await bot.pathfinder.goto(new goals.GoalNear(target.position.x, target.position.y, target.position.z, 1))
+    switch (plan.action) {
+      case 'gather':
+        const blockType = bot.registry.blocksByName[plan.target]
+        if (!blockType) {
+            bot.chat(`Non conosco il blocco ${plan.target}`)
+            break
+        }
+
+        // Cerca il blocco nel mondo
+        const block = bot.findBlock({
+          matching: blockType.id,
+          maxDistance: 64
+        })
+
+        if (block) {
+          bot.chat(`Vado a prendere ${plan.target}...`)
+          // collectBlock gestisce pathfinding, equipaggiamento tool e scavo in automatico
+          await bot.collectBlock.collect(block)
+          bot.chat(`Preso ${plan.target}.`)
+        } else {
+          bot.chat(`Non trovo ${plan.target} nelle vicinanze.`)
+          // Qui si potrebbe implementare una routine di esplorazione
         }
         break
 
       case 'stop':
         bot.pathfinder.stop()
-        priorityCommand = null
-        break
-
-      case 'dig':
-        const blockName = decision.block || "oak_log"
-        const blocks = bot.findBlocks({ matching: b => b.name.includes(blockName), maxDistance: 32, count: 1 })
-        if (blocks.length > 0) {
-            bot.chat("Scavo.")
-            priorityCommand = null
-            const targetBlock = bot.blockAt(blocks[0])
-            await bot.tool.equipForBlock(targetBlock)
-            await bot.dig(targetBlock)
-        } else {
-            bot.chat("Non trovo blocchi.")
-            priorityCommand = null
-        }
-        break
-
-      case 'move':
-        if (!priorityCommand) {
-             const x = bot.entity.position.x + (decision.x || 0)
-             const z = bot.entity.position.z + (decision.z || 0)
-             await bot.pathfinder.goto(new goals.GoalNear(x, bot.entity.position.y, z, 1))
-        }
+        currentGoal = null
+        bot.chat("Fermo.")
         break
         
       case 'idle':
-         // Piccolo delay per non spammare la CPU
-         await new Promise(r => setTimeout(r, 1000))
-         break
+        // Nessuna operazione costosa
+        await new Promise(r => setTimeout(r, 500))
+        break
     }
   } catch (err) {
-    console.log(`[FAIL] ${err.message}`)
+    // Se l'errore è dovuto all'interrupt manuale, è previsto.
+    if (interruptSignal) {
+        console.log('[SYSTEM] Azione interrotta dall\'utente.')
+    } else {
+        console.log(`[FAIL] Errore esecuzione: ${err.message}`)
+        bot.chat("Ho avuto un problema durante l'azione.")
+    }
   }
-  
-  isActionInProgress = false // ABBASSA IL SEMAFORO VERDE
+
+  // Reset stati
+  isBusy = false
+  interruptSignal = false
 }
 
-// --- IL CUORE DEL SISTEMA (LOOP RICORSIVO) ---
-async function decisionLoop() {
-  // 1. Se il bot sta lavorando, NON disturbare. Riprova tra poco.
-  if (isActionInProgress || bot.pathfinder.isMoving()) {
-      setTimeout(decisionLoop, 500)
-      return
-  }
+// --- LOOP PRINCIPALE ---
+async function mainLoop() {
+  while (true) {
+    // 1. Se siamo liberi, pensiamo
+    if (!isBusy) {
+        // Se non c'è un ordine, attendi input (risparmio CPU/GPU)
+        if (!currentGoal) {
+            await new Promise(r => setTimeout(r, 1000))
+            continue
+        }
 
-  // 2. Chiedi al cervello
-  // Nota: Se askBrain ritorna null (perché annullato dalla chat), non facciamo nulla.
-  const decision = await askBrain()
-  
-  // 3. Esegui (Questo bloccherà il codice finché l'azione non finisce)
-  if (decision) {
-      await execute(decision)
+        const decision = await analyzeSituation()
+        
+        // Eseguiamo solo se non siamo stati interrotti durante il pensiero
+        if (!interruptSignal) {
+            await executeAction(decision)
+        }
+    }
+    
+    // Piccolo throttle per stabilità del loop
+    await new Promise(r => setTimeout(r, 100))
   }
-
-  // 4. Appena finito, ricomincia subito
-  setTimeout(decisionLoop, 100)
 }
