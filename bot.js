@@ -32,6 +32,7 @@ let currentGoal = null; // L'obiettivo di alto livello (es: "Ottieni legna")
 let isBusy = false; // Flag di stato fisico
 let interruptSignal = false; // Segnale per abortire l'azione fisica corrente
 let gathered = 0; // Quantità di blocchi ottenuti
+let _username = ""; // Nome del giocatore che ha eseguito l'azione
 
 // --- SYSTEM PROMPT OTTIMIZZATO ---
 // Definiamo un output JSON rigoroso. L'AI decide COSA fare, non COME muoversi.
@@ -46,6 +47,8 @@ AVAILABLE ACTIONS (JSON format):
    - Use this immediately if the user says stop.
 3. IDLE: {"action": "idle"}
    - Use this if you have completed the task or have nothing to do.
+4. FOLLOW: {"action": "follow" }
+   - Use this if the user says to follow him to his location.
 
 LOGIC RULES:
 - If user wants a Crafting Table but you have no wood -> Action is GATHER oak_log.
@@ -74,7 +77,7 @@ bot.on("chat", (username, message) => {
     bot.collectBlock.cancelTask(); // Funzione critica di collectblock
     console.log("[SYSTEM] Interruzione forzata.");
   }
-
+  _username = username;
   // 2. Aggiornamento Obiettivo
   currentGoal = message;
 });
@@ -133,7 +136,7 @@ async function executeAction(plan) {
   console.log(
     `[EXEC] Action: ${plan.action} | Target: ${plan.target || "N/A"} | Count: ${
       plan.count || "N/A"
-    }`
+    } | Inquirer: ${_username}`
   );
   try {
     switch (plan.action) {
@@ -142,7 +145,7 @@ async function executeAction(plan) {
           currentGoal = null;
           !isBusy;
           gathered = 0;
-          console.log(`[EXEC] Action: idle | count gathering completed.`)
+          console.log(`[EXEC] Action: idle | count gathering completed.`);
           break;
         }
 
@@ -169,7 +172,7 @@ async function executeAction(plan) {
         if (block) {
           bot.chat(`Vado a prendere ${plan.count} ${plan.target}...`);
           // collectBlock gestisce pathfinding, equipaggiamento tool e scavo in automatico
-          await bot.collectBlock.collect(block)
+          await bot.collectBlock.collect(block);
           gathered++;
           bot.chat(`Preso ${plan.target}.`);
           console.log(
@@ -185,6 +188,21 @@ async function executeAction(plan) {
         bot.pathfinder.stop();
         currentGoal = null;
         bot.chat("Fermo.");
+        break;
+
+      case "follow":
+        const target = bot.players[_username]
+          ? bot.players[_username].entity
+          : null;
+
+        if (!target) {
+          bot.chat("Non trovo la tua posizione");
+        }
+
+        const p = target.position;
+
+        bot.pathfinder.setGoal(new goals.GoalNear(p.x, p.y, p.z, 1));
+        bot.chat("Arrivo.");
         break;
 
       case "idle":
