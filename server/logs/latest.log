@@ -1,96 +1,199 @@
-[17:15:59] [ServerMain/INFO]: Environment: authHost='https://authserver.mojang.com', accountsHost='https://api.mojang.com', sessionHost='https://sessionserver.mojang.com', servicesHost='https://api.minecraftservices.com', name='PROD'
-[17:16:00] [ServerMain/INFO]: Loaded 7 recipes
-[17:16:00] [ServerMain/INFO]: Loaded 1271 advancements
-[17:16:01] [Server thread/INFO]: Starting minecraft server version 1.20.1
-[17:16:01] [Server thread/INFO]: Loading properties
-[17:16:01] [Server thread/INFO]: Default game type: SURVIVAL
-[17:16:01] [Server thread/INFO]: Generating keypair
-[17:16:01] [Server thread/INFO]: Starting Minecraft server on *:25565
-[17:16:01] [Server thread/INFO]: Using epoll channel type
-[17:16:01] [Server thread/WARN]: **** SERVER IS RUNNING IN OFFLINE/INSECURE MODE!
-[17:16:01] [Server thread/WARN]: The server will make no attempt to authenticate usernames. Beware.
-[17:16:01] [Server thread/WARN]: While this makes the game possible to play without internet access, it also opens up the ability for hackers to connect with any username they choose.
-[17:16:01] [Server thread/WARN]: To change this, set "online-mode" to "true" in the server.properties file.
-[17:16:01] [Server thread/INFO]: Preparing level "world"
-[17:16:03] [Server thread/INFO]: Preparing start region for dimension minecraft:overworld
-[17:16:06] [Worker-Main-9/INFO]: Preparing spawn area: 0%
-[17:16:06] [Worker-Main-10/INFO]: Preparing spawn area: 0%
-[17:16:06] [Worker-Main-7/INFO]: Preparing spawn area: 0%
-[17:16:06] [Worker-Main-1/INFO]: Preparing spawn area: 0%
-[17:16:06] [Worker-Main-3/INFO]: Preparing spawn area: 0%
-[17:16:06] [Worker-Main-8/INFO]: Preparing spawn area: 0%
-[17:16:06] [Worker-Main-5/INFO]: Preparing spawn area: 0%
-[17:16:06] [Worker-Main-7/INFO]: Preparing spawn area: 32%
-[17:16:06] [Server thread/INFO]: Time elapsed: 3845 ms
-[17:16:06] [Server thread/INFO]: Done (5.571s)! For help, type "help"
-[17:16:14] [Server thread/INFO]: GabibboDSQuared[/127.0.0.1:38348] logged in with entity id 134 at (1406.892745595314, 70.0, 1034.4881522817589)
-[17:16:14] [Server thread/INFO]: GabibboDSQuared joined the game
-[17:16:21] [Server thread/INFO]: AI_Engineer[/127.0.0.1:33644] logged in with entity id 224 at (1405.5924706886683, 70.0, 1029.5002919677597)
-[17:16:21] [Server thread/INFO]: AI_Engineer joined the game
-[17:16:31] [Server thread/INFO]: [Not Secure] <GabibboDSQuared> prendi legno di quercia
-[17:17:10] [Server thread/INFO]: [GabibboDSQuared: The difficulty has been set to Peaceful]
-[17:17:23] [Server thread/INFO]: [Not Secure] <GabibboDSQuared> stop
-[17:17:35] [Server thread/INFO]: [Not Secure] <GabibboDSQuared> gather oak log
-[17:18:03] [Server thread/INFO]: AI_Engineer lost connection: Disconnected
-[17:18:03] [Server thread/INFO]: AI_Engineer left the game
-[17:18:12] [Server thread/INFO]: AI_Engineer[/127.0.0.1:60908] logged in with entity id 323 at (1407.191066822294, 70.0, 1030.8979660872596)
-[17:18:12] [Server thread/INFO]: AI_Engineer joined the game
-[17:18:43] [Server thread/INFO]: [Not Secure] <GabibboDSQuared> gather oak log
-[17:18:49] [Server thread/INFO]: [Not Secure] <AI_Engineer> Vado a prendere oak_log...
-[17:19:07] [Server thread/INFO]: [Not Secure] <GabibboDSQuared> stop
-[17:19:09] [Server thread/INFO]: [Not Secure] <AI_Engineer> Preso oak_log.
-[17:19:10] [Server thread/INFO]: [Not Secure] <AI_Engineer> Fermo.
-[17:19:23] [Server thread/INFO]: [GabibboDSQuared: Teleported 2 entities to GabibboDSQuared]
-[17:19:37] [Server thread/INFO]: [Not Secure] <GabibboDSQuared> gather oak log
-[17:19:40] [Server thread/INFO]: [Not Secure] <AI_Engineer> Vado a prendere oak_log...
-[17:19:58] [Server thread/INFO]: [GabibboDSQuared: Set own game mode to Spectator Mode]
-[17:20:35] [Server thread/INFO]: [Not Secure] <AI_Engineer> Ho avuto un problema durante l'azione.
-[17:20:38] [Server thread/INFO]: [Not Secure] <AI_Engineer> Vado a prendere oak_log...
-[17:20:43] [Server thread/INFO]: [Not Secure] <AI_Engineer> Ho avuto un problema durante l'azione.
-[17:20:45] [Server thread/INFO]: [Not Secure] <AI_Engineer> Vado a prendere oak_log...
-[17:20:47] [Server thread/INFO]: [GabibboDSQuared: Removed 6 item(s) from player AI_Engineer]
-[17:20:50] [Server thread/INFO]: [Not Secure] <AI_Engineer> Ho avuto un problema durante l'azione.
-[17:20:53] [Server thread/INFO]: [Not Secure] <AI_Engineer> Vado a prendere oak_log...
-[17:20:58] [Server thread/INFO]: [Not Secure] <AI_Engineer> Ho avuto un problema durante l'azione.
-[17:21:00] [Server thread/INFO]: [GabibboDSQuared: Set own game mode to Creative Mode]
-[17:21:00] [Server thread/INFO]: [Not Secure] <AI_Engineer> Vado a prendere oak_log...
-[17:21:05] [Server thread/INFO]: [Not Secure] <AI_Engineer> Ho avuto un problema durante l'azione.
-[17:21:08] [Server thread/INFO]: [Not Secure] <AI_Engineer> Vado a prendere oak_log...
-[17:21:16] [Server thread/INFO]: AI_Engineer has made the advancement [Stone Age]
-[17:21:29] [Server thread/INFO]: GabibboDSQuared has made the advancement [Stone Age]
-[17:21:50] [Server thread/INFO]: [Not Secure] <AI_Engineer> Preso oak_log.
-[17:21:52] [Server thread/INFO]: [Not Secure] <AI_Engineer> Vado a prendere oak_log...
-[17:21:57] [Server thread/INFO]: [Not Secure] <AI_Engineer> Preso oak_log.
-[17:22:00] [Server thread/INFO]: [Not Secure] <AI_Engineer> Vado a prendere oak_log...
-[17:22:04] [Server thread/INFO]: [Not Secure] <AI_Engineer> Preso oak_log.
-[17:22:07] [Server thread/INFO]: [Not Secure] <AI_Engineer> Vado a prendere oak_log...
-[17:22:12] [Server thread/INFO]: [Not Secure] <AI_Engineer> Preso oak_log.
-[17:22:15] [Server thread/INFO]: [Not Secure] <AI_Engineer> Vado a prendere oak_log...
-[17:22:21] [Server thread/INFO]: [Not Secure] <AI_Engineer> Preso oak_log.
-[17:22:23] [Server thread/INFO]: [Not Secure] <AI_Engineer> Vado a prendere oak_log...
-[17:22:37] [Server thread/INFO]: [Not Secure] <AI_Engineer> Preso oak_log.
-[17:22:40] [Server thread/INFO]: [Not Secure] <AI_Engineer> Vado a prendere oak_log...
-[17:22:45] [Server thread/INFO]: [Not Secure] <AI_Engineer> Preso oak_log.
-[17:22:47] [Server thread/INFO]: [Not Secure] <AI_Engineer> Vado a prendere oak_log...
-[17:22:51] [Server thread/INFO]: [Not Secure] <AI_Engineer> Preso oak_log.
-[17:22:53] [Server thread/INFO]: [GabibboDSQuared: Removed 46 item(s) from player AI_Engineer]
-[17:22:53] [Server thread/INFO]: [Not Secure] <AI_Engineer> Vado a prendere oak_log...
-[17:22:58] [Server thread/INFO]: [Not Secure] <AI_Engineer> Preso oak_log.
-[17:23:01] [Server thread/INFO]: [Not Secure] <AI_Engineer> Vado a prendere oak_log...
-[17:23:05] [Server thread/INFO]: [Not Secure] <AI_Engineer> Preso oak_log.
-[17:23:07] [Server thread/INFO]: [GabibboDSQuared: Removed 2 item(s) from player AI_Engineer]
-[17:23:08] [Server thread/INFO]: [Not Secure] <AI_Engineer> Vado a prendere oak_log...
-[17:23:13] [Server thread/INFO]: [Not Secure] <AI_Engineer> Preso oak_log.
-[17:23:15] [Server thread/INFO]: [Not Secure] <AI_Engineer> Vado a prendere oak_log...
-[17:23:25] [Server thread/INFO]: [Not Secure] <AI_Engineer> Preso oak_log.
-[17:23:28] [Server thread/INFO]: [Not Secure] <AI_Engineer> Vado a prendere oak_log...
-[17:23:29] [Server thread/INFO]: [Not Secure] <AI_Engineer> Preso oak_log.
-[17:23:32] [Server thread/INFO]: [Not Secure] <AI_Engineer> Vado a prendere oak_log...
-[17:23:34] [Server thread/INFO]: [Not Secure] <AI_Engineer> Preso oak_log.
-[17:23:37] [Server thread/INFO]: [Not Secure] <AI_Engineer> Vado a prendere oak_log...
-[17:23:39] [Server thread/INFO]: [Not Secure] <AI_Engineer> Preso oak_log.
-[17:23:42] [Server thread/INFO]: [Not Secure] <AI_Engineer> Vado a prendere oak_log...
-[17:23:50] [Server thread/INFO]: GabibboDSQuared lost connection: Disconnected
-[17:23:50] [Server thread/INFO]: GabibboDSQuared left the game
-[17:23:55] [Server thread/INFO]: AI_Engineer lost connection: Disconnected
-[17:23:55] [Server thread/INFO]: AI_Engineer left the game
+[16:01:14] [ServerMain/WARN]: [oshi.driver.windows.perfmon.PerfmonDisabled] Invalid registry value type detected for PerfOS counters. Should be REG_DWORD. Ignoring: HKEY_LOCAL_MACHINE\SYSTEM\CurrentControlSet\Services\PerfOS\Performance\Disable Performance Counters.
+[16:01:17] [ServerMain/INFO]: Environment: authHost='https://authserver.mojang.com', accountsHost='https://api.mojang.com', sessionHost='https://sessionserver.mojang.com', servicesHost='https://api.minecraftservices.com', name='PROD'
+[16:01:17] [ServerMain/INFO]: Found new data pack file/bukkit, loading it automatically
+[16:01:17] [ServerMain/INFO]: Loaded 7 recipes
+[16:01:17] [Server thread/INFO]: Starting minecraft server version 1.20.1
+[16:01:17] [Server thread/INFO]: Loading properties
+[16:01:18] [Server thread/INFO]: This server is running Paper version git-Paper-196 (MC: 1.20.1) (Implementing API version 1.20.1-R0.1-SNAPSHOT) (Git: 773dd72)
+[16:01:18] [Server thread/INFO]: Server Ping Player Sample Count: 12
+[16:01:18] [Server thread/INFO]: Using 4 threads for Netty based IO
+[16:01:18] [Server thread/INFO]: [ChunkTaskScheduler] Chunk system is using 1 I/O threads, 3 worker threads, and gen parallelism of 3 threads
+[16:01:18] [Server thread/WARN]: [!] The timings profiler has been enabled but has been scheduled for removal from Paper in the future.
+    We recommend installing the spark profiler as a replacement: https://spark.lucko.me/
+    For more information please visit: https://github.com/PaperMC/Paper/issues/8948
+[16:01:18] [Server thread/INFO]: Default game type: SURVIVAL
+[16:01:18] [Server thread/INFO]: Generating keypair
+[16:01:18] [Server thread/INFO]: Starting Minecraft server on *:25565
+[16:01:18] [Server thread/INFO]: Using default channel type
+[16:01:18] [Server thread/INFO]: Paper: Using Java compression from Velocity.
+[16:01:18] [Server thread/INFO]: Paper: Using Java cipher from Velocity.
+[16:01:18] [Server thread/INFO]: [InvSee++] Loading server plugin InvSeePlusPlus v0.30.15
+[16:01:18] [Server thread/WARN]: **** SERVER IS RUNNING IN OFFLINE/INSECURE MODE!
+[16:01:18] [Server thread/WARN]: The server will make no attempt to authenticate usernames. Beware.
+[16:01:18] [Server thread/WARN]: While this makes the game possible to play without internet access, it also opens up the ability for hackers to connect with any username they choose.
+[16:01:18] [Server thread/WARN]: To change this, set "online-mode" to "true" in the server.properties file.
+[16:01:18] [Server thread/INFO]: Preparing level "world"
+[16:01:18] [Server thread/INFO]: ---- Migration of old nether folder required ----
+[16:01:18] [Server thread/INFO]: Unfortunately due to the way that Minecraft implemented multiworld support in 1.6, Bukkit requires that you move your nether folder to a new location in order to operate correctly.
+[16:01:18] [Server thread/INFO]: We will move this folder for you, but it will mean that you need to move it back should you wish to stop using Bukkit in the future.
+[16:01:18] [Server thread/INFO]: Attempting to move world\DIM-1 to world_nether\DIM-1...
+[16:01:18] [Server thread/INFO]: Success! To restore nether in the future, simply move world_nether\DIM-1 to world\DIM-1
+[16:01:18] [Server thread/INFO]: ---- Migration of old nether folder complete ----
+[16:01:18] [Server thread/INFO]: ---- Migration of old the_end folder required ----
+[16:01:18] [Server thread/INFO]: Unfortunately due to the way that Minecraft implemented multiworld support in 1.6, Bukkit requires that you move your the_end folder to a new location in order to operate correctly.
+[16:01:18] [Server thread/INFO]: We will move this folder for you, but it will mean that you need to move it back should you wish to stop using Bukkit in the future.
+[16:01:18] [Server thread/INFO]: Attempting to move world\DIM1 to world_the_end\DIM1...
+[16:01:18] [Server thread/INFO]: Success! To restore the_end in the future, simply move world_the_end\DIM1 to world\DIM1
+[16:01:18] [Server thread/INFO]: ---- Migration of old the_end folder complete ----
+[16:01:18] [Server thread/INFO]: Preparing start region for dimension minecraft:overworld
+[16:01:19] [Server thread/INFO]: Time elapsed: 133 ms
+[16:01:19] [Server thread/INFO]: Preparing start region for dimension minecraft:the_nether
+[16:01:19] [Server thread/INFO]: Time elapsed: 15 ms
+[16:01:19] [Server thread/INFO]: Preparing start region for dimension minecraft:the_end
+[16:01:19] [Server thread/INFO]: Time elapsed: 16 ms
+[16:01:19] [Server thread/INFO]: [InvSee++] Enabling InvSeePlusPlus v0.30.15
+[16:01:19] [Server thread/INFO]: [InvSee++] Detected server software: CraftBukkit version 1.20.1
+[16:01:19] [Server thread/INFO]: Running delayed init tasks
+[16:01:19] [Server thread/INFO]: Done (1.371s)! For help, type "help"
+[16:01:19] [Server thread/INFO]: Timings Reset
+[16:01:27] [Server thread/INFO]: Nothing changed. The player already is an operator
+[16:01:34] [Server thread/INFO]: Nothing changed. The player already is an operator
+[16:01:40] [User Authenticator #0/INFO]: UUID of player AI_Engineer is 09997518-b4d5-3afb-8dce-c3079a6d1a2b
+[16:01:40] [Server thread/INFO]: AI_Engineer joined the game
+[16:01:40] [Server thread/INFO]: AI_Engineer[/[0:0:0:0:0:0:0:1]:51298] logged in with entity id 312 at ([world]1522.6034731955178, 79.0, 982.5423366252721)
+[16:02:04] [User Authenticator #0/INFO]: UUID of player justmammt is 39269b3c-0ae3-315d-ac88-aa560d290390
+[16:02:04] [Server thread/INFO]: justmammt joined the game
+[16:02:04] [Server thread/INFO]: justmammt[/[0:0:0:0:0:0:0:1]:51305] logged in with entity id 515 at ([world]1521.550231979812, 79.0, 977.1992436371323)
+[16:02:41] [Server thread/INFO]: AI_Engineer lost connection: Disconnected
+[16:02:41] [Server thread/INFO]: AI_Engineer left the game
+[16:02:42] [User Authenticator #0/INFO]: UUID of player AI_Engineer is 09997518-b4d5-3afb-8dce-c3079a6d1a2b
+[16:02:42] [Server thread/INFO]: AI_Engineer joined the game
+[16:02:42] [Server thread/INFO]: AI_Engineer[/[0:0:0:0:0:0:0:1]:51326] logged in with entity id 578 at ([world]1522.6034731955178, 79.0, 982.5423366252721)
+[16:02:49] [Server thread/INFO]: justmammt issued server command: /invsee AI_Engineer
+[16:03:01] [Async Chat Thread - #1/INFO]: [Not Secure] <justmammt> gather oak_log 2
+[16:03:12] [Async Chat Thread - #0/INFO]: [Not Secure] <AI_Engineer> Ho avuto un problema durante l'azione.
+[16:03:14] [Async Chat Thread - #1/INFO]: [Not Secure] <AI_Engineer> Ho avuto un problema durante l'azione.
+[16:03:17] [Async Chat Thread - #0/INFO]: [Not Secure] <AI_Engineer> Ho avuto un problema durante l'azione.
+[16:03:17] [Server thread/INFO]: AI_Engineer lost connection: Disconnected
+[16:03:17] [Server thread/INFO]: AI_Engineer left the game
+[16:03:48] [User Authenticator #1/INFO]: UUID of player AI_Engineer is 09997518-b4d5-3afb-8dce-c3079a6d1a2b
+[16:03:48] [Server thread/INFO]: AI_Engineer joined the game
+[16:03:48] [Server thread/INFO]: AI_Engineer[/[0:0:0:0:0:0:0:1]:51762] logged in with entity id 675 at ([world]1522.6034731955178, 79.0, 982.5423366252721)
+[16:03:53] [Async Chat Thread - #1/INFO]: [Not Secure] <justmammt> gather oak_log 2
+[16:03:55] [Async Chat Thread - #0/INFO]: [Not Secure] <AI_Engineer> Ho avuto un problema durante l'azione.
+[16:03:58] [Async Chat Thread - #1/INFO]: [Not Secure] <AI_Engineer> Ho avuto un problema durante l'azione.
+[16:04:00] [Server thread/INFO]: AI_Engineer lost connection: Disconnected
+[16:04:00] [Server thread/INFO]: AI_Engineer left the game
+[16:04:57] [User Authenticator #2/INFO]: UUID of player AI_Engineer is 09997518-b4d5-3afb-8dce-c3079a6d1a2b
+[16:04:57] [Server thread/INFO]: AI_Engineer joined the game
+[16:04:57] [Server thread/INFO]: AI_Engineer[/[0:0:0:0:0:0:0:1]:51782] logged in with entity id 779 at ([world]1522.6034731955178, 79.0, 982.5423366252721)
+[16:05:01] [Async Chat Thread - #3/INFO]: [Not Secure] <justmammt> gather oak_log 2
+[16:05:04] [Async Chat Thread - #2/INFO]: [Not Secure] <AI_Engineer> Vado a prendere 2 oak_log...
+[16:05:07] [Async Chat Thread - #3/INFO]: [Not Secure] <AI_Engineer> Preso oak_log.
+[16:05:10] [Async Chat Thread - #2/INFO]: [Not Secure] <AI_Engineer> Vado a prendere 2 oak_log...
+[16:05:11] [Server thread/INFO]: AI_Engineer lost connection: Disconnected
+[16:05:11] [Server thread/INFO]: AI_Engineer left the game
+[16:05:40] [User Authenticator #2/INFO]: UUID of player AI_Engineer is 09997518-b4d5-3afb-8dce-c3079a6d1a2b
+[16:05:40] [Server thread/INFO]: AI_Engineer joined the game
+[16:05:40] [Server thread/INFO]: AI_Engineer[/[0:0:0:0:0:0:0:1]:51793] logged in with entity id 838 at ([world]1522.5, 79.0, 980.5297081841885)
+[16:05:43] [Async Chat Thread - #3/INFO]: [Not Secure] <justmammt> gather oak_log 2
+[16:05:47] [Async Chat Thread - #2/INFO]: [Not Secure] <AI_Engineer> Vado a prendere 2 oak_log...
+[16:05:48] [Async Chat Thread - #3/INFO]: [Not Secure] <AI_Engineer> Preso oak_log.
+[16:05:52] [Async Chat Thread - #2/INFO]: [Not Secure] <AI_Engineer> Vado a prendere 2 oak_log...
+[16:05:54] [Async Chat Thread - #3/INFO]: [Not Secure] <AI_Engineer> Preso oak_log.
+[16:05:57] [Async Chat Thread - #2/INFO]: [Not Secure] <AI_Engineer> Vado a prendere 2 oak_log...
+[16:05:59] [Async Chat Thread - #3/INFO]: [Not Secure] <AI_Engineer> Preso oak_log.
+[16:06:00] [Server thread/INFO]: AI_Engineer lost connection: Disconnected
+[16:06:00] [Server thread/INFO]: AI_Engineer left the game
+[16:06:25] [User Authenticator #2/INFO]: UUID of player AI_Engineer is 09997518-b4d5-3afb-8dce-c3079a6d1a2b
+[16:06:26] [Server thread/INFO]: AI_Engineer joined the game
+[16:06:26] [Server thread/INFO]: AI_Engineer[/[0:0:0:0:0:0:0:1]:51809] logged in with entity id 934 at ([world]1523.5, 79.0, 979.5)
+[16:06:31] [Async Chat Thread - #2/INFO]: [Not Secure] <justmammt> gather oak_log 2
+[16:06:35] [Async Chat Thread - #3/INFO]: [Not Secure] <AI_Engineer> Ho avuto un problema durante l'azione.
+[16:06:37] [Async Chat Thread - #2/INFO]: [Not Secure] <AI_Engineer> Ho avuto un problema durante l'azione.
+[16:06:39] [Server thread/INFO]: AI_Engineer lost connection: Disconnected
+[16:06:39] [Server thread/INFO]: AI_Engineer left the game
+[16:09:32] [User Authenticator #3/INFO]: UUID of player AI_Engineer is 09997518-b4d5-3afb-8dce-c3079a6d1a2b
+[16:09:33] [Server thread/INFO]: AI_Engineer joined the game
+[16:09:33] [Server thread/INFO]: AI_Engineer[/[0:0:0:0:0:0:0:1]:49215] logged in with entity id 1199 at ([world]1526.108051610762, 79.0, 981.3449074289208)
+[16:10:18] [Server thread/INFO]: AI_Engineer lost connection: Disconnected
+[16:10:18] [Server thread/INFO]: AI_Engineer left the game
+[16:10:19] [User Authenticator #3/INFO]: UUID of player AI_Engineer is 09997518-b4d5-3afb-8dce-c3079a6d1a2b
+[16:10:19] [Server thread/INFO]: AI_Engineer joined the game
+[16:10:19] [Server thread/INFO]: AI_Engineer[/[0:0:0:0:0:0:0:1]:49227] logged in with entity id 1300 at ([world]1526.108051610762, 79.0, 981.3449074289208)
+[16:10:34] [Async Chat Thread - #5/INFO]: [Not Secure] <justmammt> gather oak log 2
+[16:10:38] [Async Chat Thread - #4/INFO]: [Not Secure] <AI_Engineer> Vado a prendere 2 oak_log...
+[16:10:41] [Async Chat Thread - #5/INFO]: [Not Secure] <AI_Engineer> Preso oak_log.
+[16:10:44] [Async Chat Thread - #4/INFO]: [Not Secure] <AI_Engineer> Vado a prendere 2 oak_log...
+[16:10:46] [Async Chat Thread - #5/INFO]: [Not Secure] <AI_Engineer> Preso oak_log.
+[16:13:02] [Server thread/INFO]: AI_Engineer lost connection: Disconnected
+[16:13:02] [Server thread/INFO]: AI_Engineer left the game
+[16:13:03] [User Authenticator #4/INFO]: UUID of player AI_Engineer is 09997518-b4d5-3afb-8dce-c3079a6d1a2b
+[16:13:03] [Server thread/INFO]: AI_Engineer joined the game
+[16:13:03] [Server thread/INFO]: AI_Engineer[/[0:0:0:0:0:0:0:1]:55012] logged in with entity id 1538 at ([world]1523.5, 79.0, 979.5)
+[16:13:14] [Async Chat Thread - #8/INFO]: [Not Secure] <justmammt> gather oak log 2
+[16:13:16] [Async Chat Thread - #6/INFO]: [Not Secure] <AI_Engineer> Vado a prendere 2 oak_log...
+[16:13:16] [Async Chat Thread - #6/INFO]: [Not Secure] <AI_Engineer> Preso oak_log.
+[16:13:19] [Async Chat Thread - #8/INFO]: [Not Secure] <AI_Engineer> Vado a prendere 2 oak_log...
+[16:13:19] [Async Chat Thread - #8/INFO]: [Not Secure] <AI_Engineer> Preso oak_log.
+[16:13:21] [Async Chat Thread - #6/INFO]: [Not Secure] <AI_Engineer> Vado a prendere 2 oak_log...
+[16:13:21] [Async Chat Thread - #6/INFO]: [Not Secure] <AI_Engineer> Preso oak_log.
+[16:13:24] [Async Chat Thread - #8/INFO]: [Not Secure] <AI_Engineer> Vado a prendere 2 oak_log...
+[16:13:24] [Async Chat Thread - #8/INFO]: [Not Secure] <AI_Engineer> Preso oak_log.
+[16:13:26] [Async Chat Thread - #6/INFO]: [Not Secure] <AI_Engineer> Vado a prendere 2 oak_log...
+[16:13:26] [Async Chat Thread - #6/INFO]: [Not Secure] <AI_Engineer> Preso oak_log.
+[16:13:26] [Server thread/INFO]: AI_Engineer lost connection: Disconnected
+[16:13:26] [Server thread/INFO]: AI_Engineer left the game
+[16:14:45] [User Authenticator #5/INFO]: UUID of player AI_Engineer is 09997518-b4d5-3afb-8dce-c3079a6d1a2b
+[16:14:45] [Server thread/INFO]: AI_Engineer joined the game
+[16:14:45] [Server thread/INFO]: AI_Engineer[/[0:0:0:0:0:0:0:1]:55046] logged in with entity id 1685 at ([world]1525.707303667288, 79.0, 982.8042302094756)
+[16:17:32] [Async Chat Thread - #10/INFO]: [Not Secure] <justmammt> gather oak log 2
+[16:17:35] [Async Chat Thread - #9/INFO]: [Not Secure] <AI_Engineer> Vado a prendere 2 oak_log...
+[16:17:35] [Async Chat Thread - #9/INFO]: [Not Secure] <AI_Engineer> Preso oak_log.
+[16:17:38] [Async Chat Thread - #10/INFO]: [Not Secure] <AI_Engineer> Vado a prendere 2 oak_log...
+[16:17:38] [Async Chat Thread - #10/INFO]: [Not Secure] <AI_Engineer> Preso oak_log.
+[16:18:12] [Server thread/INFO]: AI_Engineer lost connection: Disconnected
+[16:18:12] [Server thread/INFO]: AI_Engineer left the game
+[16:18:14] [User Authenticator #6/INFO]: UUID of player AI_Engineer is 09997518-b4d5-3afb-8dce-c3079a6d1a2b
+[16:18:14] [Server thread/INFO]: AI_Engineer joined the game
+[16:18:14] [Server thread/INFO]: AI_Engineer[/[0:0:0:0:0:0:0:1]:59994] logged in with entity id 1981 at ([world]1525.707303667288, 79.0, 982.8042302094756)
+[16:18:14] [Server thread/INFO]: AI_Engineer lost connection: Disconnected
+[16:18:14] [Server thread/INFO]: AI_Engineer left the game
+[16:18:30] [User Authenticator #6/INFO]: UUID of player AI_Engineer is 09997518-b4d5-3afb-8dce-c3079a6d1a2b
+[16:18:30] [Server thread/INFO]: AI_Engineer joined the game
+[16:18:30] [Server thread/INFO]: AI_Engineer[/[0:0:0:0:0:0:0:1]:60000] logged in with entity id 2002 at ([world]1525.707303667288, 79.0, 982.8042302094756)
+[16:19:02] [Async Chat Thread - #13/INFO]: [Not Secure] <justmammt> gather oak log 2
+[16:19:04] [Async Chat Thread - #12/INFO]: [Not Secure] <AI_Engineer> Vado a prendere 2 oak_log...
+[16:19:07] [Async Chat Thread - #13/INFO]: [Not Secure] <AI_Engineer> Preso oak_log.
+[16:19:10] [Async Chat Thread - #12/INFO]: [Not Secure] <AI_Engineer> Vado a prendere 2 oak_log...
+[16:19:12] [Async Chat Thread - #13/INFO]: [Not Secure] <AI_Engineer> Preso oak_log.
+[16:22:03] [Async Chat Thread - #15/INFO]: [Not Secure] <justmammt> gather cactus 1
+[16:22:06] [Async Chat Thread - #14/INFO]: [Not Secure] <AI_Engineer> Vado a prendere 1 cactus...
+[16:22:10] [Async Chat Thread - #15/INFO]: [Not Secure] <AI_Engineer> Preso cactus.
+[16:22:22] [Async Chat Thread - #14/INFO]: [Not Secure] <justmammt> gather sand 3
+[16:22:24] [Async Chat Thread - #15/INFO]: [Not Secure] <AI_Engineer> Vado a prendere 3 sand...
+[16:22:26] [Async Chat Thread - #14/INFO]: [Not Secure] <AI_Engineer> Preso sand.
+[16:22:28] [Async Chat Thread - #15/INFO]: [Not Secure] <AI_Engineer> Vado a prendere 3 sand...
+[16:22:31] [Async Chat Thread - #14/INFO]: [Not Secure] <AI_Engineer> Preso sand.
+[16:22:33] [Async Chat Thread - #15/INFO]: [Not Secure] <AI_Engineer> Vado a prendere 3 sand...
+[16:22:35] [Async Chat Thread - #14/INFO]: [Not Secure] <AI_Engineer> Preso sand.
+[16:23:07] [Server thread/INFO]: AI_Engineer lost connection: Disconnected
+[16:23:07] [Server thread/INFO]: AI_Engineer left the game
+[16:23:09] [Server thread/INFO]: Stopping server
+[16:23:09] [Server thread/INFO]: [InvSee++] Disabling InvSeePlusPlus v0.30.15
+[16:23:09] [Server thread/INFO]: Saving players
+[16:23:09] [Server thread/INFO]: justmammt lost connection: Server closed
+[16:23:09] [Server thread/INFO]: justmammt left the game
+[16:23:09] [Server thread/INFO]: Saving worlds
+[16:23:09] [Server thread/INFO]: Saving chunks for level 'ServerLevel[world]'/minecraft:overworld
+[16:23:09] [Server thread/INFO]: [ChunkHolderManager] Waiting 60s for chunk system to halt for world 'world'
+[16:23:09] [Server thread/INFO]: [ChunkHolderManager] Halted chunk system for world 'world'
+[16:23:09] [Server thread/INFO]: [ChunkHolderManager] Saving all chunkholders for world 'world'
+[16:23:09] [Server thread/INFO]: [ChunkHolderManager] Saved 59 block chunks, 185 entity chunks, 0 poi chunks in world 'world' in 0,06s
+[16:23:09] [Server thread/INFO]: ThreadedAnvilChunkStorage (world): All chunks are saved
+[16:23:09] [Server thread/INFO]: Saving chunks for level 'ServerLevel[world_nether]'/minecraft:the_nether
+[16:23:09] [Server thread/INFO]: [ChunkHolderManager] Waiting 60s for chunk system to halt for world 'world_nether'
+[16:23:09] [Server thread/INFO]: [ChunkHolderManager] Halted chunk system for world 'world_nether'
+[16:23:09] [Server thread/INFO]: [ChunkHolderManager] Saving all chunkholders for world 'world_nether'
+[16:23:09] [Server thread/INFO]: [ChunkHolderManager] Saved 1499 block chunks, 15 entity chunks, 0 poi chunks in world 'world_nether' in 0,21s
+[16:23:09] [Server thread/INFO]: ThreadedAnvilChunkStorage (DIM-1): All chunks are saved
+[16:23:09] [Server thread/INFO]: Saving chunks for level 'ServerLevel[world_the_end]'/minecraft:the_end
+[16:23:09] [Server thread/INFO]: [ChunkHolderManager] Waiting 60s for chunk system to halt for world 'world_the_end'
+[16:23:09] [Server thread/INFO]: [ChunkHolderManager] Halted chunk system for world 'world_the_end'
+[16:23:09] [Server thread/INFO]: [ChunkHolderManager] Saving all chunkholders for world 'world_the_end'
+[16:23:09] [Server thread/INFO]: [ChunkHolderManager] Saved 1496 block chunks, 19 entity chunks, 0 poi chunks in world 'world_the_end' in 0,12s
+[16:23:09] [Server thread/INFO]: ThreadedAnvilChunkStorage (DIM1): All chunks are saved
+[16:23:09] [Server thread/INFO]: ThreadedAnvilChunkStorage: All dimensions are saved
+[16:23:09] [Server thread/INFO]: Flushing Chunk IO
+[16:23:09] [Server thread/INFO]: Closing Thread Pool
+[16:23:09] [Server thread/INFO]: Closing Server
