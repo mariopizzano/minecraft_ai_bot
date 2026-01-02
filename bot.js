@@ -48,7 +48,7 @@ AVAILABLE ACTIONS (JSON format):
 3. IDLE: {"action": "idle"}
    - Use this if you have completed the task or have nothing to do.
 4. FOLLOW: {"action": "follow" }
-   - Use this if the user says to follow him to his location.
+   - Use this if the user says to follow him to his location. (example keywords: "follow me", "seguimi")
 
 LOGIC RULES:
 - If user wants a Crafting Table but you have no wood -> Action is GATHER oak_log.

@@ -15,7 +15,8 @@
   "type": "commonjs",
   "main": "bot.js",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "server": "java -jar -Xmx2G ./server/server.jar nogui"
   },
   "dependencies": {
     "axios": "^1.13.2",
