@@ -7,6 +7,8 @@
   },
   "minecraft:adventure/adventuring_time": {
     "criteria": {
+      "minecraft:wooded_badlands": "2026-01-03 01:15:38 +0100",
+      "minecraft:badlands": "2026-01-03 01:15:39 +0100",
       "minecraft:beach": "2025-12-31 21:23:22 +0100",
       "minecraft:river": "2025-12-31 23:44:11 +0100",
       "minecraft:forest": "2025-12-31 21:23:58 +0100",
@@ -343,6 +345,18 @@
   "minecraft:recipes/building_blocks/oak_wood": {
     "criteria": {
       "has_log": "2025-12-31 23:42:44 +0100"
+    },
+    "done": true
+  },
+  "minecraft:recipes/building_blocks/birch_wood": {
+    "criteria": {
+      "has_log": "2026-01-03 01:16:58 +0100"
+    },
+    "done": true
+  },
+  "minecraft:recipes/misc/green_dye": {
+    "criteria": {
+      "has_cactus": "2026-01-03 01:06:12 +0100"
     },
     "done": true
   },

@@ -7,7 +7,11 @@
   },
   "minecraft:adventure/adventuring_time": {
     "criteria": {
-      "minecraft:desert": "2026-01-01 15:59:41 +0100"
+      "minecraft:wooded_badlands": "2026-01-03 01:15:34 +0100",
+      "minecraft:badlands": "2026-01-03 01:15:24 +0100",
+      "minecraft:forest": "2026-01-03 01:15:37 +0100",
+      "minecraft:desert": "2026-01-01 15:59:41 +0100",
+      "minecraft:jungle": "2026-01-03 01:15:36 +0100"
     },
     "done": false
   },
@@ -392,6 +396,60 @@
   "minecraft:recipes/misc/green_dye": {
     "criteria": {
       "has_cactus": "2026-01-02 16:22:09 +0100"
+    },
+    "done": true
+  },
+  "minecraft:recipes/decorations/ladder": {
+    "criteria": {
+      "has_stick": "2026-01-03 01:15:38 +0100"
+    },
+    "done": true
+  },
+  "minecraft:recipes/decorations/campfire": {
+    "criteria": {
+      "has_stick": "2026-01-03 01:15:38 +0100"
+    },
+    "done": true
+  },
+  "minecraft:recipes/tools/wooden_hoe": {
+    "criteria": {
+      "has_stick": "2026-01-03 01:15:38 +0100"
+    },
+    "done": true
+  },
+  "minecraft:recipes/tools/wooden_pickaxe": {
+    "criteria": {
+      "has_stick": "2026-01-03 01:15:38 +0100"
+    },
+    "done": true
+  },
+  "minecraft:recipes/tools/wooden_axe": {
+    "criteria": {
+      "has_stick": "2026-01-03 01:15:38 +0100"
+    },
+    "done": true
+  },
+  "minecraft:recipes/tools/wooden_shovel": {
+    "criteria": {
+      "has_stick": "2026-01-03 01:15:38 +0100"
+    },
+    "done": true
+  },
+  "minecraft:recipes/combat/wooden_sword": {
+    "criteria": {
+      "has_stick": "2026-01-03 01:15:38 +0100"
+    },
+    "done": true
+  },
+  "minecraft:recipes/building_blocks/birch_planks": {
+    "criteria": {
+      "has_logs": "2026-01-03 01:15:40 +0100"
+    },
+    "done": true
+  },
+  "minecraft:recipes/building_blocks/birch_wood": {
+    "criteria": {
+      "has_log": "2026-01-03 01:15:40 +0100"
     },
     "done": true
   },

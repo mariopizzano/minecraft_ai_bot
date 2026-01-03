@@ -49,11 +49,13 @@ AVAILABLE ACTIONS (JSON format):
    - Use this if you have completed the task or have nothing to do.
 4. FOLLOW: {"action": "follow" }
    - Use this if the user says to follow him to his location. (example keywords: "follow me", "seguimi")
+5. COME: {"action": "come" }
+   - Use this if the user says to GO to his location, without following him (doesn't need to be specified.)
 
 LOGIC RULES:
 - If user wants a Crafting Table but you have no wood -> Action is GATHER oak_log.
 - If user wants a Crafting Table and you HAVE wood -> (Next module we will implement crafting). For now, IDLE.
-- Always check INVENTORY before deciding.
+- Always return actions in lowercase.
 `;
 
 // --- GESTIONE EVENTI ---
@@ -201,10 +203,26 @@ async function executeAction(plan) {
 
         const p = target.position;
 
-        bot.pathfinder.setGoal(new goals.GoalNear(p.x, p.y, p.z, 1));
-        bot.chat("Arrivo.");
+        bot.pathfinder.setGoal(new goals.GoalNear(p.x, p.y, p.z, 1), true);
+        bot.chat("Ti sto seguendo.");
         break;
 
+      case "come":
+        const _target = bot.players[_username]
+          ? bot.players[_username].entity
+          : null;
+
+        if (!_target) {
+          bot.chat("Non trovo la tua posizione");
+        }
+
+        const _p = _target.position;
+
+        bot.pathfinder.setGoal(new goals.GoalNear(_p.x, _p.y, _p.z, 1))
+        
+        currentGoal = null;
+        isBusy = false;
+        break;
       case "idle":
         // Nessuna operazione costosa
         await new Promise((r) => setTimeout(r, 1000));
