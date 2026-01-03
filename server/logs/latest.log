@@ -1,65 +1,45 @@
-[22:14:36] [ServerMain/WARN]: [oshi.driver.windows.perfmon.PerfmonDisabled] Invalid registry value type detected for PerfOS counters. Should be REG_DWORD. Ignoring: HKEY_LOCAL_MACHINE\SYSTEM\CurrentControlSet\Services\PerfOS\Performance\Disable Performance Counters.
-[22:14:38] [ServerMain/INFO]: Environment: authHost='https://authserver.mojang.com', accountsHost='https://api.mojang.com', sessionHost='https://sessionserver.mojang.com', servicesHost='https://api.minecraftservices.com', name='PROD'
-[22:14:39] [ServerMain/INFO]: Loaded 7 recipes
-[22:14:40] [Server thread/INFO]: Starting minecraft server version 1.20.1
-[22:14:40] [Server thread/INFO]: Loading properties
-[22:14:40] [Server thread/INFO]: This server is running Paper version git-Paper-196 (MC: 1.20.1) (Implementing API version 1.20.1-R0.1-SNAPSHOT) (Git: 773dd72)
-[22:14:40] [Server thread/INFO]: Server Ping Player Sample Count: 12
-[22:14:40] [Server thread/INFO]: Using 4 threads for Netty based IO
-[22:14:40] [Server thread/WARN]: [!] The timings profiler has been enabled but has been scheduled for removal from Paper in the future.
+[11:53:42] [ServerMain/INFO]: Environment: authHost='https://authserver.mojang.com', accountsHost='https://api.mojang.com', sessionHost='https://sessionserver.mojang.com', servicesHost='https://api.minecraftservices.com', name='PROD'
+[11:53:43] [ServerMain/INFO]: Loaded 7 recipes
+[11:53:44] [Server thread/INFO]: Starting minecraft server version 1.20.1
+[11:53:44] [Server thread/INFO]: Loading properties
+[11:53:44] [Server thread/INFO]: This server is running Paper version git-Paper-196 (MC: 1.20.1) (Implementing API version 1.20.1-R0.1-SNAPSHOT) (Git: 773dd72)
+[11:53:45] [Server thread/INFO]: Server Ping Player Sample Count: 12
+[11:53:45] [Server thread/INFO]: Using 4 threads for Netty based IO
+[11:53:45] [Server thread/WARN]: [!] The timings profiler has been enabled but has been scheduled for removal from Paper in the future.
     We recommend installing the spark profiler as a replacement: https://spark.lucko.me/
     For more information please visit: https://github.com/PaperMC/Paper/issues/8948
-[22:14:40] [Server thread/INFO]: [ChunkTaskScheduler] Chunk system is using 1 I/O threads, 3 worker threads, and gen parallelism of 3 threads
-[22:14:40] [Server thread/INFO]: Default game type: SURVIVAL
-[22:14:40] [Server thread/INFO]: Generating keypair
-[22:14:40] [Server thread/INFO]: Starting Minecraft server on *:25565
-[22:14:40] [Server thread/INFO]: Using default channel type
-[22:14:40] [Server thread/INFO]: Paper: Using Java compression from Velocity.
-[22:14:40] [Server thread/INFO]: Paper: Using Java cipher from Velocity.
-[22:14:40] [Server thread/INFO]: [InvSee++] Loading server plugin InvSeePlusPlus v0.30.15
-[22:14:40] [Server thread/INFO]: Server permissions file permissions.yml is empty, ignoring it
-[22:14:40] [Server thread/WARN]: **** SERVER IS RUNNING IN OFFLINE/INSECURE MODE!
-[22:14:40] [Server thread/WARN]: The server will make no attempt to authenticate usernames. Beware.
-[22:14:40] [Server thread/WARN]: While this makes the game possible to play without internet access, it also opens up the ability for hackers to connect with any username they choose.
-[22:14:40] [Server thread/WARN]: To change this, set "online-mode" to "true" in the server.properties file.
-[22:14:40] [Server thread/INFO]: Preparing level "world"
-[22:14:41] [Server thread/INFO]: Preparing start region for dimension minecraft:overworld
-[22:14:41] [Server thread/INFO]: Time elapsed: 173 ms
-[22:14:41] [Server thread/INFO]: Preparing start region for dimension minecraft:the_nether
-[22:14:41] [Server thread/INFO]: Time elapsed: 31 ms
-[22:14:41] [Server thread/INFO]: Preparing start region for dimension minecraft:the_end
-[22:14:41] [Server thread/INFO]: Time elapsed: 32 ms
-[22:14:41] [Server thread/INFO]: [InvSee++] Enabling InvSeePlusPlus v0.30.15
-[22:14:41] [Server thread/INFO]: [InvSee++] Detected server software: CraftBukkit version 1.20.1
-[22:14:41] [Server thread/INFO]: Running delayed init tasks
-[22:14:41] [Server thread/INFO]: Done (1.834s)! For help, type "help"
-[22:14:41] [Server thread/INFO]: Timings Reset
-[22:17:10] [User Authenticator #0/INFO]: UUID of player AI_Engineer is 09997518-b4d5-3afb-8dce-c3079a6d1a2b
-[22:17:10] [Server thread/INFO]: AI_Engineer joined the game
-[22:17:10] [Server thread/INFO]: AI_Engineer[/[0:0:0:0:0:0:0:1]:63171] logged in with entity id 239 at ([world]1523.5538958491973, 79.0, 979.3074866677416)
-[22:17:16] [User Authenticator #0/INFO]: UUID of player justmammt is 39269b3c-0ae3-315d-ac88-aa560d290390
-[22:17:16] [Server thread/INFO]: justmammt joined the game
-[22:17:16] [Server thread/INFO]: justmammt[/[0:0:0:0:0:0:0:1]:63177] logged in with entity id 311 at ([world]1517.810615627073, 80.0, 971.3251308067157)
-[22:17:39] [Async Chat Thread - #1/INFO]: [Not Secure] <justmammt> vieni qua
-[22:17:54] [Async Chat Thread - #0/INFO]: [Not Secure] <AI_Engineer> Arrivo.
-[22:17:55] [Async Chat Thread - #1/INFO]: [Not Secure] <AI_Engineer> Arrivo.
-[22:17:56] [Async Chat Thread - #0/INFO]: [Not Secure] <AI_Engineer> Arrivo.
-[22:17:57] [Async Chat Thread - #1/INFO]: [Not Secure] <AI_Engineer> Arrivo.
-[22:17:59] [Async Chat Thread - #0/INFO]: [Not Secure] <AI_Engineer> Arrivo.
-[22:18:00] [Async Chat Thread - #1/INFO]: [Not Secure] <AI_Engineer> Arrivo.
-[22:18:01] [Async Chat Thread - #0/INFO]: [Not Secure] <AI_Engineer> Arrivo.
-[22:18:03] [Async Chat Thread - #0/INFO]: [Not Secure] <AI_Engineer> Arrivo.
-[22:18:05] [Async Chat Thread - #1/INFO]: [Not Secure] <AI_Engineer> Arrivo.
-[22:18:06] [Async Chat Thread - #0/INFO]: [Not Secure] <AI_Engineer> Arrivo.
-[22:18:08] [Async Chat Thread - #1/INFO]: [Not Secure] <AI_Engineer> Arrivo.
-[22:18:09] [Async Chat Thread - #0/INFO]: [Not Secure] <AI_Engineer> Arrivo.
-[22:18:09] [Async Chat Thread - #1/INFO]: [Not Secure] <justmammt> stop
-[22:18:14] [Async Chat Thread - #0/INFO]: [Not Secure] <justmammt> gather 3 oak_log
-[22:18:19] [Async Chat Thread - #1/INFO]: [Not Secure] <AI_Engineer> Vado a prendere 3 oak_log...
-[22:18:22] [Async Chat Thread - #0/INFO]: [Not Secure] <AI_Engineer> Preso oak_log.
-[22:18:26] [Async Chat Thread - #1/INFO]: [Not Secure] <AI_Engineer> Vado a prendere 3 oak_log...
-[22:18:28] [Async Chat Thread - #0/INFO]: [Not Secure] <AI_Engineer> Preso oak_log.
-[22:18:32] [Async Chat Thread - #1/INFO]: [Not Secure] <AI_Engineer> Vado a prendere 3 oak_log...
-[22:18:34] [Async Chat Thread - #0/INFO]: [Not Secure] <AI_Engineer> Preso oak_log.
-[22:18:55] [Server thread/INFO]: justmammt lost connection: Disconnected
-[22:18:55] [Server thread/INFO]: justmammt left the game
+[11:53:45] [Server thread/INFO]: [ChunkTaskScheduler] Chunk system is using 1 I/O threads, 2 worker threads, and gen parallelism of 2 threads
+[11:53:46] [Server thread/INFO]: Default game type: SURVIVAL
+[11:53:46] [Server thread/INFO]: Generating keypair
+[11:53:46] [Server thread/INFO]: Starting Minecraft server on *:25565
+[11:53:46] [Server thread/INFO]: Using default channel type
+[11:53:46] [Server thread/INFO]: Paper: Using libdeflate (macOS ARM64 / Apple Silicon) compression from Velocity.
+[11:53:46] [Server thread/INFO]: Paper: Using native (macOS ARM64 / Apple Silicon) cipher from Velocity.
+[11:53:46] [Server thread/INFO]: [InvSee++] Loading server plugin InvSeePlusPlus v0.30.15
+[11:53:46] [Server thread/INFO]: Server permissions file permissions.yml is empty, ignoring it
+[11:53:46] [Server thread/WARN]: **** SERVER IS RUNNING IN OFFLINE/INSECURE MODE!
+[11:53:46] [Server thread/WARN]: The server will make no attempt to authenticate usernames. Beware.
+[11:53:46] [Server thread/WARN]: While this makes the game possible to play without internet access, it also opens up the ability for hackers to connect with any username they choose.
+[11:53:46] [Server thread/WARN]: To change this, set "online-mode" to "true" in the server.properties file.
+[11:53:46] [Server thread/INFO]: Preparing level "world"
+[11:53:47] [Server thread/INFO]: Preparing start region for dimension minecraft:overworld
+[11:53:47] [Server thread/INFO]: Time elapsed: 196 ms
+[11:53:47] [Server thread/INFO]: Preparing start region for dimension minecraft:the_nether
+[11:53:47] [Server thread/INFO]: Time elapsed: 94 ms
+[11:53:47] [Server thread/INFO]: Preparing start region for dimension minecraft:the_end
+[11:53:47] [Server thread/INFO]: Time elapsed: 54 ms
+[11:53:47] [Server thread/INFO]: [InvSee++] Enabling InvSeePlusPlus v0.30.15
+[11:53:47] [Server thread/INFO]: [InvSee++] Detected server software: CraftBukkit version 1.20.1
+[11:53:48] [Server thread/INFO]: Running delayed init tasks
+[11:53:48] [Server thread/INFO]: Done (3.795s)! For help, type "help"
+[11:53:48] [Server thread/INFO]: Timings Reset
+[11:53:52] [User Authenticator #0/INFO]: UUID of player AI_Engineer is 09997518-b4d5-3afb-8dce-c3079a6d1a2b
+[11:53:53] [Server thread/INFO]: AI_Engineer joined the game
+[11:53:53] [Server thread/INFO]: AI_Engineer[/[0:0:0:0:0:0:0:1]:59619] logged in with entity id 239 at ([world]1523.5538958491973, 79.0, 979.3074866677416)
+[11:54:49] [Server thread/INFO]: AI_Engineer lost connection: Disconnected
+[11:54:49] [Server thread/INFO]: AI_Engineer left the game
+[12:04:01] [User Authenticator #1/INFO]: UUID of player AI_Engineer is 09997518-b4d5-3afb-8dce-c3079a6d1a2b
+[12:04:01] [Server thread/INFO]: AI_Engineer joined the game
+[12:04:01] [Server thread/INFO]: AI_Engineer[/[0:0:0:0:0:0:0:1]:59839] logged in with entity id 352 at ([world]1523.5538958491973, 79.0, 979.3074866677416)
+[12:04:04] [Server thread/INFO]: AI_Engineer lost connection: Disconnected
+[12:04:04] [Server thread/INFO]: AI_Engineer left the game

@@ -3,17 +3,7 @@ const { pathfinder, Movements, goals } = require("mineflayer-pathfinder");
 const collectBlock = require("mineflayer-collectblock").plugin;
 const toolPlugin = require("mineflayer-tool").plugin;
 const axios = require("axios");
-
-// --- CONFIGURAZIONE ---
-const CONFIG = {
-  host: "localhost",
-  port: 25565,
-  username: "AI_Engineer",
-  model: "llama3.1",
-  api_url: "http://localhost:11434/api/generate",
-  ctx: 2048, // Aumentato per gestire meglio lo stato
-  timeout: 15000,
-};
+const CONFIG = require("./src/config"); 
 
 const bot = mineflayer.createBot({
   host: CONFIG.host,
@@ -33,28 +23,6 @@ let isBusy = false; // Flag di stato fisico
 let interruptSignal = false; // Segnale per abortire l'azione fisica corrente
 let gathered = 0; // Quantità di blocchi ottenuti
 let _username = ""; // Nome del giocatore che ha eseguito l'azione
-
-// --- SYSTEM PROMPT OTTIMIZZATO ---
-// Definiamo un output JSON rigoroso. L'AI decide COSA fare, non COME muoversi.
-const SYSTEM_PROMPT = `
-You are a Minecraft Autonomous Agent.
-Goal: Fulfill the user's high-level COMMAND based on your INVENTORY and STATE.
-
-AVAILABLE ACTIONS (JSON format):
-1. GATHER: {"action": "gather", "target": "oak_log", "count": 1} 
-   - Use this to get resources like wood, dirt, stone.
-2. STOP: {"action": "stop"}
-   - Use this immediately if the user says stop.
-3. IDLE: {"action": "idle"}
-   - Use this if you have completed the task or have nothing to do.
-4. FOLLOW: {"action": "follow" }
-   - Use this if the user says to follow him to his location. (example keywords: "follow me", "seguimi")
-
-LOGIC RULES:
-- If user wants a Crafting Table but you have no wood -> Action is GATHER oak_log.
-- If user wants a Crafting Table and you HAVE wood -> (Next module we will implement crafting). For now, IDLE.
-- Always check INVENTORY before deciding.
-`;
 
 // --- GESTIONE EVENTI ---
 bot.on("spawn", () => {
