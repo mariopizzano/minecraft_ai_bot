@@ -13,7 +13,7 @@
   "license": "MIT",
   "author": "mariopizzano, LaroccaA",
   "type": "commonjs",
-  "main": "bot.js",
+  "main": "index.js",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
     "server": "java -jar -Xmx2G ./server/server.jar nogui"
